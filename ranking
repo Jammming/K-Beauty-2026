@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-Beauty Top 100 | 한국 화장품 기업 순위</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --rose:    #f29dbe;
+      --rose-dk: #c94f7e;
+      --blush:   #fce8f1;
+      --gold:    #f29dbe;
+      --dark:    #1e0d18;
+      --mid:     #3d1a2d;
+      --text:    #2d1a26;
+      --muted:   #9a7288;
+      --white:   #ffffff;
+      --card:    #fffcfd;
+      --border:  #f0d6e5;
+      --green:   #4caf7d;
+      --red:     #e05c5c;
+      --tag-odm: #e8f0fe;
+      --tag-brand: #fce8f3;
+      --tag-platform: #e8fef0;
+      --tag-d2c: #fff3e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      background: #fdf4f8;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #1e0d18 0%, #3d1a2d 50%, #120810 100%);
+      color: var(--white);
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(242,157,190,.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 40%, rgba(201,79,126,.12) 0%, transparent 60%);
+    }
+    .hero-inner { position: relative; max-width: 860px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 8px;
+    }
+    .hero h1 span { color: var(--rose); }
+    .hero-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(255,255,255,.55);
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 20px 28px;
+      min-width: 160px;
+    }
+    .stat-val {
+      font-size: 28px; font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-lbl { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 6px; text-transform: uppercase; letter-spacing: .06em; }
+    .stat-sub { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; color: rgba(255,255,255,.55); margin-top: 4px; }
+
+    /* ── CONTROLS ────────────────────────────────────────────── */
+    .controls-wrap {
+      max-width: 1200px; margin: -44px auto 0;
+      padding: 0 24px;
+      position: relative; z-index: 10;
+    }
+    .controls {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.10);
+      padding: 20px 24px;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .search-box {
+      flex: 1; min-width: 200px;
+      display: flex; align-items: center; gap: 10px;
+      background: var(--blush);
+      border-radius: 12px;
+      padding: 10px 16px;
+    }
+    .search-box input {
+      border: none; background: transparent;
+      font-size: 14px; font-family: inherit;
+      color: var(--text); width: 100%; outline: none;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-ico { color: var(--muted); font-size: 16px; }
+
+    .filter-wrap { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 16px; border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 12px; font-weight: 500;
+      cursor: pointer; transition: all .2s;
+      color: var(--muted);
+      font-family: inherit;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--rose-dk);
+      background: var(--blush);
+      color: var(--rose-dk);
+    }
+
+    .sort-select {
+      padding: 8px 14px; border-radius: 12px;
+      border: 1.5px solid var(--border);
+      font-size: 13px; font-family: inherit;
+      color: var(--text); background: var(--white);
+      cursor: pointer; outline: none;
+    }
+
+    /* ── TABLE SECTION ───────────────────────────────────────── */
+    .table-section {
+      max-width: 1200px; margin: 32px auto 60px;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 16px;
+    }
+    .count-badge {
+      display: inline-block;
+      background: var(--blush); color: var(--rose-dk);
+      border-radius: 50px; padding: 2px 10px;
+      font-size: 12px; font-weight: 600; margin-left: 8px;
+    }
+
+    .company-grid { display: flex; flex-direction: column; gap: 12px; }
+
+    .company-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 20px;
+      transition: all .25s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .company-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      border-radius: 4px 0 0 4px;
+      opacity: 0;
+      background: linear-gradient(180deg, var(--rose) 0%, var(--rose-dk) 100%);
+      transition: opacity .25s;
+    }
+    .company-card:hover {
+      box-shadow: 0 8px 32px rgba(201,79,126,.12);
+      border-color: var(--rose);
+      transform: translateY(-2px);
+    }
+    .company-card:hover::before { opacity: 1; }
+    .company-card.hidden { display: none; }
+
+    /* rank badge */
+    .rank-badge {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .rank-1 { background: linear-gradient(135deg,#f5b8ce,#c94f7e); color: #fff; }
+    .rank-2 { background: linear-gradient(135deg,#f8cedd,#e0809f); color: #3d1a2d; }
+    .rank-3 { background: linear-gradient(135deg,#fce0ea,#f0a0bc); color: #3d1a2d; }
+    .rank-top10 { background: var(--blush); color: var(--rose-dk); }
+    .rank-top20 { background: #fdf0f5; color: #b06080; }
+    .rank-rest  { background: #fdf8fa; color: #b08090; }
+
+    /* info block */
+    .company-info { min-width: 0; }
+    .company-name-kr {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--dark);
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap;
+    }
+    .company-name-en {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .03em; text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .meta-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin-top: 10px;
+    }
+    .cat-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+    }
+    .cat-odm     { background: var(--tag-odm);      color: #3b5ce6; }
+    .cat-brand   { background: var(--tag-brand);    color: #c94f7e; }
+    .cat-platform{ background: var(--tag-platform); color: #2d8a57; }
+    .cat-d2c     { background: var(--tag-d2c);      color: #c07a20; }
+
+    .website-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; padding: 3px 9px;
+      border-radius: 50px; text-decoration: none;
+      background: var(--blush); color: var(--rose-dk);
+      border: 1px solid var(--border);
+      transition: all .18s; white-space: nowrap;
+    }
+    .website-btn:hover { background: var(--rose-dk); color: #fff; border-color: var(--rose-dk); }
+
+    .size-tag {
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 50px;
+      letter-spacing: .04em;
+    }
+    .size-ENT  { background: #f0eaff; color: #6030c0; }
+    .size-MM   { background: #fff0e0; color: #c06010; }
+    .size-CMRC { background: #f0f4ff; color: #4060c0; }
+
+    .brands-list {
+      font-size: 12px; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 340px;
+    }
+    .brands-list span { color: var(--text); font-weight: 500; }
+
+    /* right block */
+    .revenue-block { text-align: right; flex-shrink: 0; }
+    .revenue-val {
+      font-size: 18px; font-weight: 700;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+    .revenue-sub {
+      font-size: 11px; color: var(--muted);
+      margin-top: 2px;
+    }
+    .growth-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+      margin-top: 8px;
+    }
+    .growth-pos { background: #e8f7ef; color: var(--green); }
+    .growth-neg { background: #fde8e8; color: var(--red);   }
+    .growth-neu { background: #f0f0f5; color: var(--muted); }
+
+    .founded-lbl {
+      font-size: 11px; color: var(--muted); margin-top: 6px;
+    }
+    .hq-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── DETAIL PANEL ────────────────────────────────────────── */
+    .detail-panel {
+      display: none;
+      background: var(--blush);
+      border-radius: 0 0 18px 18px;
+      padding: 20px 24px;
+      margin-top: -12px;
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    .detail-panel.open { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+    .detail-item label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted);
+      display: block; margin-bottom: 4px;
+    }
+    .detail-item span { font-size: 14px; color: var(--text); font-weight: 500; }
+    .detail-item .ko { font-family: 'Noto Sans KR', sans-serif; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--rose-dk); text-decoration: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .company-card { grid-template-columns: 48px 1fr; }
+      .revenue-block { display: none; }
+      .meta-row .founded-lbl, .hq-lbl { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌸 K-Beauty Industry Report 2025</div>
+    <h1>한국 화장품 기업 <span>TOP 100</span><br/>Korean Cosmetics Rankings</h1>
+    <p class="hero-sub">2025년 매출액 기준 · Ranked by 2025 Annual Revenue</p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-val">$120억</div>
+        <div class="stat-lbl">2025 화장품 수출</div>
+        <div class="stat-sub">역대 최대 · All-time high</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">19조원</div>
+        <div class="stat-lbl">국내 생산액</div>
+        <div class="stat-sub">사상 최대 · Record high</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">세계 3위</div>
+        <div class="stat-lbl">화장품 수출국</div>
+        <div class="stat-sub">Global #3 Exporter</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">+18%</div>
+        <div class="stat-lbl">수출 성장률</div>
+        <div class="stat-sub">YoY Export Growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls-wrap">
+  <div class="controls">
+    <div class="search-box">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="searchInput" placeholder="기업명 또는 브랜드 검색 · Search company or brand…" oninput="filterCards()" />
+    </div>
+    <div class="filter-wrap">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('브랜드',this)">브랜드 Brand</button>
+      <button class="filter-btn" onclick="setFilter('OEM/ODM',this)">OEM / ODM</button>
+      <button class="filter-btn" onclick="setFilter('플랫폼',this)">플랫폼 Platform</button>
+      <button class="filter-btn" onclick="setFilter('직판',this)">D2C</button>
+    </div>
+    <select class="sort-select" id="sortSelect" onchange="sortCards()">
+      <option value="rank">순위 · Rank</option>
+      <option value="revenue">매출 높은 순</option>
+      <option value="growth">성장률 높은 순</option>
+      <option value="founded">설립 오래된 순</option>
+    </select>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-section">
+  <p class="section-title">기업 순위 <span class="count-badge" id="countBadge">30</span></p>
+  <div class="company-grid" id="companyGrid">
+    <!-- Cards generated by JS -->
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>📊 데이터 출처 · Sources: 금융감독원 전자공시시스템(DART), 코스인코리아, 코스모닝, 헤럴드경제, 아모레퍼시픽 공식 IR (2025)</p>
+  <p style="margin-top:6px;">✅ <strong>공식</strong>: 기업 공시 또는 IR 발표 기준 &nbsp;|&nbsp; 🔲 <strong>추정</strong>: 증권사 컨센서스 및 전년 실적 기반 추정치. 비상장사 일부 포함.</p>
+</footer>
+
+<script>
+const companies = [
+  {
+    rank: 1, nameKr: "LG생활건강", nameEn: "LG Household & Health Care",
+    revenue: 6355, revenueDisplay: "6.36조원",
+    growth: -6.7, verified: true, founded: 1947, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand Conglomerate",
+    brands: "후(Whoo), 오휘(O HUI), SUM37°, THE FACE SHOP, 빌리프(Belif)",
+    desc: "2025년 매출 6.36조원(-6.7%). 유통 체질 개선 및 희망퇴직 등 구조조정 비용 반영으로 영업이익 62.8% 감소.",
+    descEn: "2025 revenue 6.36T KRW (-6.7%). Operating profit fell 62.8% amid restructuring & channel rebalancing.",
+    ticker: "KRX: 051900",
+    employees: 4391,
+    website: "https://www.lgcare.com",
+    largeGroup: "LG그룹",
+  },
+  {
+    rank: 2, nameKr: "CJ올리브영", nameEn: "CJ Olive Young",
+    revenue: 4880, revenueDisplay: "~4.88조원",
+    growth: 22, verified: false, founded: 1999, hq: "서울 · Seoul",
+    cat: "플랫폼", catEn: "Platform / Retail",
+    brands: "Olive Young (자체 PB + 멀티샵 · H&B 플랫폼)",
+    desc: "국내 최대 H&B 플랫폼. 글로벌몰 통한 해외 직구 매출 급증. IPO 기대주.",
+    descEn: "Korea's dominant H&B retail platform. Surging overseas direct sales via Global Mall. IPO candidate.",
+    ticker: "비상장 · Private",
+    employees: 15414,
+    website: "https://www.oliveyoung.co.kr",
+    largeGroup: "CJ그룹",
+  },
+  {
+    rank: 3, nameKr: "아모레퍼시픽그룹", nameEn: "AmorePacific Group",
+    revenue: 4623, revenueDisplay: "4.62조원",
+    growth: 3.4, verified: true, founded: 1945, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand Conglomerate",
+    brands: "설화수(Sulwhasoo), 라네즈(Laneige), 이니스프리, 에뛰드, IOPE, 헤라",
+    desc: "2025년 영업이익 3,680억원으로 2019년 이후 6년 만의 최대. 미주 매출이 중화권 처음 추월.",
+    descEn: "2025 operating profit hit 6-year high at 368B KRW. Americas revenue surpassed Greater China for the first time.",
+    ticker: "KRX: 002790",
+    employees: 4703,
+    website: "https://www.apgroup.com",
+    largeGroup: "아모레퍼시픽",
+  },
+  {
+    rank: 4, nameKr: "한국콜마", nameEn: "Kolmar Korea",
+    revenue: 2720, revenueDisplay: "~2.72조원",
+    growth: 10.8, verified: false, founded: 1990, hq: "세종 · Sejong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "OEM/ODM 제조 (Beauty of Joseon, d'Alba, LAKA 등 공급)",
+    desc: "국내 1위 OEM/ODM. 2025년 국내 법인 +18% 고성장, 미국 법인은 관세 영향으로 역성장 과제.",
+    descEn: "Korea's #1 OEM/ODM. Domestic +18%, but US subsidiary facing tariff headwinds.",
+    ticker: "KRX: 161890",
+    employees: 1390,
+    website: "https://www.kolmar.co.kr",
+  },
+  {
+    rank: 5, nameKr: "코스맥스", nameEn: "Cosmax",
+    revenue: 2399, revenueDisplay: "2.40조원",
+    growth: 10.7, verified: true, founded: 1992, hq: "서울 · Seoul",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "ODM 제조 (CLIO, 달바 등 공급) · 역대 최대 실적",
+    desc: "2025년 매출 2조 3,988억원으로 역대 최대 경신. 한국·중국 회복 및 미주·중동 신시장 개척.",
+    descEn: "Record-breaking 2025 revenue of 2.4T KRW. Growth driven by Korea, China recovery, US & Middle East.",
+    ticker: "KRX: 044820",
+    employees: 1375,
+    website: "https://www.cosmax.com",
+  },
+  {
+    rank: 6, nameKr: "아토미", nameEn: "Atomy Inc.",
+    revenue: 2310, revenueDisplay: "~2.31조원",
+    growth: 5, verified: false, founded: 2009, hq: "대전 · Daejeon",
+    cat: "직판", catEn: "D2C / Network",
+    brands: "Atomy Skincare 6, Atomy Absolute CellActive",
+    desc: "25개국 이상 진출 네트워크 마케팅 기반 글로벌 뷰티·생활용품 기업.",
+    descEn: "Global network marketing beauty & lifestyle company with presence in 25+ countries.",
+    ticker: "비상장 · Private",
+    employees: null,
+    website: "https://www.atomy.com/kr",
+  },
+  {
+    rank: 7, nameKr: "에이피알", nameEn: "APR Co.",
+    revenue: 1527, revenueDisplay: "1.53조원",
+    growth: 111, verified: true, founded: 2014, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Medicube, AGE-R (뷰티 디바이스), Noncode",
+    desc: "2025년 매출 1조 5,273억원(+111%), 영업이익률 24%. 해외 매출 비중 80%로 급상승. 창사 이후 11년 연속 성장.",
+    descEn: "2025 revenue surged +111% to 1.53T KRW. Operating margin 24%. Overseas now 80% of revenue.",
+    ticker: "KRX: 278470",
+    employees: 550,
+    website: "https://apr.inc",
+  },
+  {
+    rank: 8, nameKr: "구다이글로벌", nameEn: "Goodai Global",
+    revenue: 1310, revenueDisplay: "~1.31조원",
+    growth: 40, verified: false, founded: 2013, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Skin1004, Beauty of Joseon, Tirtir, Round Lab",
+    desc: "K-인디 브랜드 포트폴리오로 글로벌 시장 공략. 미주·유럽 채널 급성장.",
+    descEn: "K-indie brand portfolio conquering global markets. Rapid growth in Americas & Europe.",
+    ticker: "비상장 · Private",
+    employees: 154,
+    website: "https://www.goodaiglobal.com",
+  },
+  {
+    rank: 9, nameKr: "실리콘투", nameEn: "Silicon2",
+    revenue: 1120, revenueDisplay: "1.12조원",
+    growth: 61.9, verified: true, founded: 2009, hq: "서울 · Seoul",
+    cat: "플랫폼", catEn: "Export Platform",
+    brands: "K-뷰티 글로벌 B2B 수출 플랫폼 (stylevana 등)",
+    desc: "2025년 매출 1조 1,196억원(+61.9%), 영업이익 2,055억원(+49.4%). 역대 최대 실적 달성.",
+    descEn: "2025 revenue +61.9% to 1.12T KRW. Record operating profit of 205.5B KRW (+49.4%).",
+    ticker: "KOSDAQ: 257720",
+    employees: 288,
+    website: "https://www.silicon2.com",
+  },
+  {
+    rank: 10, nameKr: "애경산업", nameEn: "AeKyung Industry",
+    revenue: 651, revenueDisplay: "~6,510억원",
+    growth: 5, verified: false, founded: 1954, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "AGE20's, LUNA, 2080 (구강), Kerasys (헤어)",
+    desc: "WWD 글로벌 Top 100 진입(2024). 화장품·생활용품 복합 기업. 색조 및 해외 채널 강화.",
+    descEn: "Entered WWD Global Top 100 in 2024. Expanding color cosmetics and overseas channels.",
+    ticker: "KRX: 018250",
+    employees: 943,
+    website: "https://www.aekyungindustry.com",
+    largeGroup: "애경그룹",
+  },
+  {
+    rank: 11, nameKr: "휴젤", nameEn: "Hugel Inc.",
+    revenue: 649, revenueDisplay: "~6,490억원",
+    growth: 18, verified: false, founded: 2001, hq: "춘천 · Chuncheon",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "Botulax (보툴리눔 톡신), Letybo, BREYAFILL (필러)",
+    desc: "보툴리눔 톡신·필러 전문 메디컬 뷰티. 미국 FDA 승인 Letybo 확산으로 북미 매출 급증.",
+    descEn: "Medical beauty in botulinum toxin & fillers. US revenue surging on Letybo FDA approval.",
+    ticker: "KOSDAQ: 145020",
+    employees: 628,
+    website: "https://www.hugel.co.kr",
+    largeGroup: "GS그룹",
+  },
+  {
+    rank: 12, nameKr: "달바글로벌", nameEn: "d'Alba Global",
+    revenue: 500, revenueDisplay: "~5,000억원",
+    growth: 150, verified: false, founded: 2016, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "d'Alba (화이트 트러플 스킨케어·선크림)",
+    desc: "2024년 해외 +215% 성장에 이어 2025년도 고속 성장 지속. K-인디 브랜드 성장의 아이콘.",
+    descEn: "Following +215% overseas growth in 2024, continues rapid expansion globally in 2025.",
+    ticker: "비상장 · Private",
+    employees: 137,
+    website: "https://www.dalba.com",
+  },
+  {
+    rank: 13, nameKr: "브이티코스메틱", nameEn: "VT Cosmetics",
+    revenue: 460, revenueDisplay: "~4,600억원",
+    growth: 70, verified: false, founded: 2010, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "VT, REEDLE SHOT (리들샷), VT X BTS",
+    desc: "리들샷 바이럴로 일본·동남아 1위. 2025년도 높은 성장세 유지.",
+    descEn: "Reedle Shot viral sensation drives #1 position in Japan & SE Asia. High growth continues.",
+    ticker: "KOSDAQ: 018290",
+    employees: 145,
+    website: "https://www.vtcosmetics.com",
+  },
+  {
+    rank: 14, nameKr: "클리오", nameEn: "Clio Cosmetics",
+    revenue: 403, revenueDisplay: "~4,030억원",
+    growth: 15, verified: false, founded: 1997, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "CLIO, Peripera, Goodal, DERMATORY",
+    desc: "색조 강자. 글로벌 멀티 브랜드 전략으로 북미·동남아 채널 확장.",
+    descEn: "Color cosmetics leader. Multi-brand strategy expanding in North America & Southeast Asia.",
+    ticker: "KOSDAQ: 237880",
+    employees: 372,
+    website: "https://www.clioonline.com",
+  },
+  {
+    rank: 15, nameKr: "코스메카코리아", nameEn: "Cosmetica Korea",
+    revenue: 378, revenueDisplay: "~3,780억원",
+    growth: 18, verified: false, founded: 2000, hq: "안성 · Anseong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "스킨케어 특화 OEM/ODM (인디 브랜드 다수 공급)",
+    desc: "스킨케어 특화 ODM. K-인디 브랜드 붐 지속 수혜. 해외 수주 증가.",
+    descEn: "Skincare ODM specialist. Benefiting from sustained K-indie brand boom and rising overseas orders.",
+    ticker: "KOSDAQ: 241710",
+    employees: 498,
+    website: "https://www.cosmetica.co.kr",
+  },
+  {
+    rank: 16, nameKr: "씨앤씨인터내셔날", nameEn: "C&C International",
+    revenue: 350, revenueDisplay: "~3,500억원",
+    growth: 25, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "색조 특화 OEM/ODM (글로벌 인디·멀티내셔널 공급)",
+    desc: "색조 특화 ODM. 북미·유럽 수출 비중 지속 확대.",
+    descEn: "Color-focused ODM with rapidly growing share in North America and Europe.",
+    ticker: "KOSDAQ: 352480",
+    employees: 608,
+    website: "https://www.candcinter.com",
+  },
+  {
+    rank: 17, nameKr: "웰코스", nameEn: "Welcos",
+    revenue: 281, revenueDisplay: "~2,810억원",
+    growth: 8, verified: false, founded: 1988, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Confume, KWAILNARA, Welcos Professional (헤어)",
+    desc: "헤어·바디·스킨케어 전문. 미용실 전문 헤어케어 채널 강세.",
+    descEn: "Specialist in hair, body & skincare. Strong position in professional salon haircare.",
+    ticker: "비상장 · Private",
+    employees: 167,
+    website: "https://www.welcos.com",
+  },
+  {
+    rank: 18, nameKr: "엘앤피코스메틱", nameEn: "L&P Cosmetic",
+    revenue: 275, revenueDisplay: "~2,750억원",
+    growth: 10, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "MEDIHEAL (메디힐 마스크팩)",
+    desc: "국내 마스크팩 점유율 1위 메디힐 보유. 14개국 진출, 글로벌 확장 지속.",
+    descEn: "Owner of MEDIHEAL, Korea's #1 sheet mask brand. Active expansion across 14+ countries.",
+    ticker: "비상장 · Private",
+    employees: 261,
+    website: "https://www.mediheal.com",
+  },
+  {
+    rank: 19, nameKr: "토니모리", nameEn: "Tony Moly",
+    revenue: 275, revenueDisplay: "~2,750억원",
+    growth: 10, verified: false, founded: 2006, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "TONY MOLY, Appletox, Panda's Dream",
+    desc: "독창적 패키징으로 전 세계 팬덤 보유. 미국·일본 재진출 전략 가속.",
+    descEn: "Iconic packaging drives global fanbase. Re-accelerating in US and Japan markets.",
+    ticker: "KOSDAQ: 214420",
+    employees: 114,
+    website: "https://www.tonymoly.com",
+  },
+  {
+    rank: 20, nameKr: "파마리서치", nameEn: "Pharma Research",
+    revenue: 240, revenueDisplay: "~2,400억원",
+    growth: 20, verified: false, founded: 1993, hq: "춘천 · Chuncheon",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "REJURAN (리쥬란), PDRN 솔루션",
+    desc: "PDRN(연어DNA) 원천 특허. 피부과·메디컬 뷰티 채널 선도. 글로벌 라이선스 확대.",
+    descEn: "Pioneer PDRN (salmon DNA) patent holder. Leading medical beauty channel globally.",
+    ticker: "KOSDAQ: 214450",
+    employees: 433,
+    website: "https://www.pharmaresearch.co.kr",
+  },
+  {
+    rank: 21, nameKr: "네이처리퍼블릭", nameEn: "Nature Republic",
+    revenue: 210, revenueDisplay: "~2,100억원",
+    growth: 5, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Nature Republic, Aloe Vera 92% Soothing Gel",
+    desc: "알로에 베라 수딩젤 스테디셀러 보유. 자연주의 스킨케어 글로벌 브랜드.",
+    descEn: "Evergreen Aloe Vera Soothing Gel. Nature-inspired skincare brand with global recognition.",
+    ticker: "비상장 · Private",
+    employees: 164,
+    website: "https://www.naturerepublic.com",
+  },
+  {
+    rank: 22, nameKr: "아이패밀리에스씨", nameEn: "iFamily SC",
+    revenue: 180, revenueDisplay: "~1,800억원",
+    growth: 50, verified: false, founded: 2014, hq: "부산 · Busan",
+    cat: "브랜드", catEn: "Brand",
+    brands: "rom&nd (롬앤)",
+    desc: "롬앤 단일 브랜드로 틱톡·유튜브 바이럴 기반 Z세대 글로벌 팬덤 구축. 해외 급성장.",
+    descEn: "rom&nd built a massive Gen-Z global fanbase via TikTok & YouTube. Rapid overseas growth.",
+    ticker: "비상장 · Private",
+    employees: 190,
+    website: "https://ifamilysc.com",
+  },
+  {
+    rank: 23, nameKr: "에이블씨엔씨", nameEn: "Able C&C",
+    revenue: 171, revenueDisplay: "~1,710억원",
+    growth: -5, verified: false, founded: 2000, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Missha (미샤), A'pieu (어퓨)",
+    desc: "중저가 스킨케어 선구자 미샤 보유. 중국 의존도 감소 및 체질 개선 진행 중.",
+    descEn: "Owner of Missha, affordable K-beauty pioneer. Ongoing restructuring to reduce China dependency.",
+    ticker: "비상장 · Private",
+    employees: 155,
+    website: "https://www.ablecnc.com",
+  },
+  {
+    rank: 24, nameKr: "한국화장품", nameEn: "Korea Cosmetics",
+    revenue: 168, revenueDisplay: "~1,680억원",
+    growth: 5, verified: false, founded: 1962, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Charm (참), The Oriental (동방미인)",
+    desc: "한국 화장품 산업 초기를 이끈 역사적 기업. 방문판매·전통 채널 기반.",
+    descEn: "A historic pioneer of the Korean cosmetics industry. Operates through direct-sales channels.",
+    ticker: "KRX: 123410",
+    employees: 46,
+    website: "https://www.hankooc.co.kr",
+  },
+  {
+    rank: 25, nameKr: "잇츠한불", nameEn: "It's Hanbul",
+    revenue: 161, revenueDisplay: "~1,610억원",
+    growth: 7, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "It's Skin (잇츠스킨), Prestige (한방라인)",
+    desc: "달팽이 크림·비타민C 라인으로 글로벌 인지도 보유. 기능성 스킨케어 강화.",
+    descEn: "Global recognition from snail cream & vitamin C lines. Focusing on functional skincare.",
+    ticker: "비상장 · Private",
+    employees: 94,
+    website: "https://www.itshanbul.com",
+  },
+  {
+    rank: 26, nameKr: "씨티씨바이오", nameEn: "CTC Bio",
+    revenue: 154, revenueDisplay: "~1,540억원",
+    growth: 10, verified: false, founded: 1994, hq: "안성 · Anseong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "발효·기능성 원료 OEM / 건강기능식품 복합 제조",
+    desc: "발효 및 기능성 원료 기반 OEM 강자. 화장품·건강기능식품 복합 생산.",
+    descEn: "Fermentation & functional ingredient OEM specialist. Produces both cosmetics and nutraceuticals.",
+    ticker: "KOSDAQ: 060590",
+    employees: 260,
+    website: "https://www.ctcbio.co.kr",
+  },
+  {
+    rank: 27, nameKr: "나우코스", nameEn: "Nowcos",
+    revenue: 134, revenueDisplay: "~1,340억원",
+    growth: 12, verified: false, founded: 2010, hq: "인천 · Incheon",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "중소 인디 브랜드 특화 OEM/ODM",
+    desc: "소량 다품종 OEM/ODM 특화. 인디 브랜드 창업 증가로 수혜.",
+    descEn: "Specialized in low-MOQ OEM/ODM. Benefits from the rise of indie brand startups.",
+    ticker: "비상장 · Private",
+    employees: 197,
+    website: "https://www.nowcos.co.kr",
+  },
+  {
+    rank: 28, nameKr: "코리아나화장품", nameEn: "Coreana Cosmetics",
+    revenue: 126, revenueDisplay: "~1,260억원",
+    growth: -3, verified: false, founded: 1987, hq: "천안 · Cheonan",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Coreana, Lavenir",
+    desc: "1987년 설립 중견 화장품 브랜드. 방문판매 채널 강세. 디지털 전환 모색 중.",
+    descEn: "Mid-sized heritage brand founded 1987. Strong in direct-sales. Exploring digital transformation.",
+    ticker: "KOSDAQ: 071000",
+    employees: 319,
+    website: "https://www.coreana.co.kr",
+  },
+  {
+    rank: 29, nameKr: "제닉", nameEn: "Janik",
+    revenue: 119, revenueDisplay: "~1,190억원",
+    growth: 8, verified: false, founded: 2001, hq: "인천 · Incheon",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Hydrogel Mask, Hyaluronic Fix",
+    desc: "하이드로겔 마스크팩 원조 기업. 자체 브랜드 및 OEM 사업 병행.",
+    descEn: "Pioneer of hydrogel mask packs. Operates own brands alongside OEM manufacturing.",
+    ticker: "비상장 · Private",
+    employees: 165,
+    website: "https://www.janik.co.kr",
+  },
+  {
+    rank: 30, nameKr: "한불화장품", nameEn: "Hanbul Cosmetics",
+    revenue: 105, revenueDisplay: "~1,050억원",
+    growth: 5, verified: false, founded: 1959, hq: "세종 · Sejong",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Hanbul, Ulaé, Bel Moment",
+    desc: "1959년 설립 한국 화장품 역사의 산증인. 한방·프리미엄 라인 운영.",
+    descEn: "A living history of Korean cosmetics since 1959. Operates oriental herbal & premium lines.",
+    ticker: "비상장 · Private",
+    employees: null,
+    website: "https://www.hanbul.com",
+  }
+,
+  {
+    rank: 31, nameKr: "클래시스", nameEn: "Classys",
+    revenue: 98, revenueDisplay: "~980억원",
+    growth: 30, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "기기", catEn: "Device",
+    brands: "Volnewmer (볼뉴머), HIFU 기기, Ultraformer",
+    desc: "고강도 집중 초음파(HIFU) 미용 기기 글로벌 선도 기업. 50개국 이상 수출.",
+    descEn: "Global leader in HIFU aesthetic devices. Exports to 50+ countries.",
+    ticker: "KOSDAQ: 214150",
+    employees: 320,
+    website: "https://www.classys.com",
+  },
+  {
+    rank: 32, nameKr: "마녀공장", nameEn: "Manyo Factory",
+    revenue: 93, revenueDisplay: "~930억원",
+    growth: 55, verified: false, founded: 2014, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Manyo Factory, Bifida Biome (바이피다 바이옴)",
+    desc: "발효 성분 기반 자연주의 스킨케어 브랜드. 미국 Costco·Ulta 입점 성공.",
+    descEn: "Fermentation-based natural skincare. Successfully entered US Costco & Ulta.",
+    ticker: "KOSDAQ: 439090",
+    employees: 170,
+    website: "https://www.manyo.co.kr",
+  },
+  {
+    rank: 33, nameKr: "라운드랩", nameEn: "Round Lab",
+    revenue: 88, revenueDisplay: "~880억원",
+    growth: 70, verified: false, founded: 2018, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Round Lab, 독도토너 (Dokdo Toner), Birch Juice",
+    desc: "독도토너·버치주스 라인으로 아마존·올리브영 입점 성공. 비건 인증 브랜드.",
+    descEn: "Dokdo Toner & Birch Juice line driving success on Amazon & Olive Young. Vegan certified.",
+    ticker: "비상장 · Private",
+    employees: 240,
+    website: "https://roundlab.co.kr",
+  },
+  {
+    rank: 34, nameKr: "더파운더즈", nameEn: "The Founders",
+    revenue: 85, revenueDisplay: "~850억원",
+    growth: 200, verified: false, founded: 2019, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Anua (아누아), 허니웨일 (Honey Whale)",
+    desc: "아누아 브랜드 보유 인디 뷰티 홀딩스. 틱톡·SNS 바이럴로 글로벌 메가 브랜드로 성장.",
+    descEn: "Indie beauty holdings owning Anua. Viral TikTok & SNS growth into global mega brand.",
+    ticker: "비상장 · Private",
+    employees: 350,
+    website: "https://anua.kr",
+  },
+  {
+    rank: 35, nameKr: "카버코리아", nameEn: "Carver Korea",
+    revenue: 82, revenueDisplay: "~820억원",
+    growth: -10, verified: false, founded: 1999, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "AHC (에이에이치씨), VB Program",
+    desc: "아이크림·마스크 전문 AHC 보유. 2017년 유니레버에 인수. 홈쇼핑 채널 주력.",
+    descEn: "Owner of AHC (eye cream, mask specialist). Acquired by Unilever in 2017. Home shopping focused.",
+    ticker: "비상장 · Private",
+    employees: 410,
+    website: "https://www.ahcbeauty.com",
+    largeGroup: "Unilever",
+  },
+  {
+    rank: 36, nameKr: "해브앤비", nameEn: "Have and Be",
+    revenue: 78, revenueDisplay: "~780억원",
+    growth: -15, verified: false, founded: 2004, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Dr. Jart+ (닥터자르트), DEW OF MIND",
+    desc: "닥터자르트 모기업. 2019년 에스티로더 그룹 인수. 더마코스메틱 글로벌 브랜드.",
+    descEn: "Dr. Jart+ parent company. Acquired by Estee Lauder Companies in 2019. Global dermacosmetic brand.",
+    ticker: "비상장 · Private",
+    employees: 280,
+    website: "https://www.drjart.com",
+    largeGroup: "Estée Lauder",
+  },
+  {
+    rank: 37, nameKr: "잉글우드랩", nameEn: "Englewood Lab",
+    revenue: 75, revenueDisplay: "~750억원",
+    growth: 8, verified: false, founded: 1993, hq: "경기 의정부 · Uijeongbu",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "글로벌 스킨케어 OEM (아마존 PB 등 300+ 브랜드)",
+    desc: "미국 현지 OEM 법인 보유, 북미 시장 특화 ODM. 글로벌 300개 이상 브랜드 위탁제조.",
+    descEn: "US-based OEM subsidiary. North America-focused ODM producing for 300+ global brands.",
+    ticker: "KOSDAQ: 950140",
+    employees: 290,
+    website: "https://www.englewoodlab.com",
+    largeGroup: "독립 대기업",
+  },
+  {
+    rank: 38, nameKr: "인터코스코리아", nameEn: "Intercos Korea",
+    revenue: 72, revenueDisplay: "~720억원",
+    growth: 40, verified: false, founded: 2010, hq: "경기 수원 · Suwon",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "색조 OEM (샤넬, 랑콤, 로레알 등 글로벌 공급)",
+    desc: "이탈리아 인터코스 그룹 한국 법인. 색조 화장품 OEM 전문. 글로벌 럭셔리 브랜드 공급.",
+    descEn: "Korean subsidiary of Italian Intercos Group. Color cosmetics OEM specialist for global luxury brands.",
+    ticker: "비상장 · Private",
+    employees: 210,
+    website: "https://www.intercos.com",
+    largeGroup: "Intercos",
+  },
+  {
+    rank: 39, nameKr: "현대바이오랜드", nameEn: "Hyundai Bioland",
+    revenue: 69, revenueDisplay: "~690억원",
+    growth: 12, verified: false, founded: 1993, hq: "충북 음성 · Eumseong",
+    cat: "원료", catEn: "Ingredients",
+    brands: "히알루론산, 천연 추출물, 발효 원료 (국내 점유율 50%+)",
+    desc: "천연 화장품 원료 시장 점유율 50% 이상. 히알루론산·발효 원료 선도 기업.",
+    descEn: "50%+ share in natural cosmetic ingredient market. Pioneer in hyaluronic acid & fermented ingredients.",
+    ticker: "KOSDAQ: 052260",
+    employees: 260,
+    website: "http://www.hyundaibioland.co.kr",
+  },
+  {
+    rank: 40, nameKr: "바이오던스", nameEn: "Biodance",
+    revenue: 66, revenueDisplay: "~660억원",
+    growth: 220, verified: false, founded: 2020, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Biodance, Bio-Collagen Real Deep Mask",
+    desc: "반고체 콜라겐 마스크로 아마존 베스트셀러 달성. SNS 바이럴로 글로벌 급성장 중인 인디 브랜드.",
+    descEn: "Semi-solid collagen mask became Amazon bestseller. Indie brand with explosive SNS-driven global growth.",
+    ticker: "비상장 · Private",
+    employees: 120,
+    website: "https://biodance.kr",
+  },
+  {
+    rank: 41, nameKr: "원텍", nameEn: "Wontech",
+    revenue: 63, revenueDisplay: "~630억원",
+    growth: -3, verified: false, founded: 2003, hq: "서울 · Seoul",
+    cat: "기기", catEn: "Device",
+    brands: "Lavieen (라비앙), 레이저·RF 미용기기",
+    desc: "레이저·RF 기반 미용 의료기기 전문 기업. 피부과 병원 채널 강세.",
+    descEn: "Laser & RF-based aesthetic medical device specialist. Strong dermatology clinic channel.",
+    ticker: "KOSDAQ: 336570",
+    employees: 210,
+    website: "https://wontech.co.kr",
+  },
+  {
+    rank: 42, nameKr: "스킨푸드", nameEn: "Skin Food",
+    revenue: 60, revenueDisplay: "~600억원",
+    growth: 25, verified: false, founded: 2004, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Skin Food, Black Sugar Mask, Carrot Pad",
+    desc: "음식 재료 기반 자연주의 화장품 브랜드. 당근 패드 등 시그니처 제품 글로벌 재성장.",
+    descEn: "Food ingredient-based natural cosmetics brand. Carrot Pad and signature products driving global revival.",
+    ticker: "비상장 · Private",
+    employees: 135,
+    website: "https://www.theskinfood.com",
+  },
+  {
+    rank: 43, nameKr: "홀리카홀리카", nameEn: "Holika Holika",
+    revenue: 56, revenueDisplay: "~560억원",
+    growth: 10, verified: false, founded: 2010, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Holika Holika, Pig-Nose, Gudetama 콜라보",
+    desc: "캐릭터 컬래버 기반 발랄한 뷰티 브랜드. 미주·동남아 아마존 글로벌 온라인 확장.",
+    descEn: "Playful beauty brand known for character collabs. Expanding globally via Amazon in Americas & SE Asia.",
+    ticker: "비상장 · Private",
+    employees: 120,
+    website: "https://www.holikaholika.co.kr",
+  },
+  {
+    rank: 44, nameKr: "엔코스", nameEn: "ENCOS",
+    revenue: 53, revenueDisplay: "~530억원",
+    growth: 50, verified: false, founded: 2008, hq: "경기 이천 · Icheon",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "마스크팩·스킨케어 OEM (Biodance 등 인디 브랜드 위탁)",
+    desc: "반고체 마스크팩 전문 ODM. 바이오던스 등 고성장 인디 브랜드 위탁제조 수혜.",
+    descEn: "Semi-solid mask pack ODM specialist. Benefits from producing for fast-growing indie brands like Biodance.",
+    ticker: "비상장 · Private",
+    employees: 230,
+    website: "https://www.encos.co.kr",
+  },
+  {
+    rank: 45, nameKr: "파파레서피", nameEn: "Papa Recipe",
+    revenue: 50, revenueDisplay: "~500억원",
+    growth: 12, verified: false, founded: 2010, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Papa Recipe, Bombee Honey Mask, Spring Honey",
+    desc: "꿀 기반 시트 마스크 전문 브랜드. 한국 마스크팩 수출 스테디셀러.",
+    descEn: "Honey-based sheet mask brand. Steady K-beauty mask pack export performer.",
+    ticker: "비상장 · Private",
+    employees: 90,
+    website: "https://paparecipe.com",
+  },
+  {
+    rank: 46, nameKr: "인코스팜", nameEn: "Incospharm",
+    revenue: 48, revenueDisplay: "~480억원",
+    growth: 22, verified: false, founded: 2001, hq: "대전 · Daejeon",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "Altruist 등 OEM 공급, 자체 브랜드 Iaso",
+    desc: "기능성 원료 연구 기반 ODM. 기초 및 기능성 스킨케어 위탁제조.",
+    descEn: "Functional ingredient research-based ODM. Contract manufacturing for basic and functional skincare.",
+    ticker: "KOSDAQ: 049070",
+    employees: 290,
+    website: "https://www.incospharm.com",
+  },
+  {
+    rank: 47, nameKr: "CNP차앤박화장품", nameEn: "CNP Laboratory",
+    revenue: 46, revenueDisplay: "~460억원",
+    growth: 55, verified: false, founded: 2002, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "CNP Rx (CNP 처방 스킨케어), Propolis Energy Ampule",
+    desc: "피부과학 기반 더마코스메틱. 프로폴리스 앰플 글로벌 인기. LG생활건강 계열.",
+    descEn: "Dermatology-based dermacosmetic. Propolis ampule popular globally. LG H&H subsidiary.",
+    ticker: "비상장 · Private",
+    employees: 100,
+    website: "https://cnpcosmetics.com",
+    largeGroup: "LG그룹",
+  },
+  {
+    rank: 48, nameKr: "조선미녀", nameEn: "Beauty of Joseon",
+    revenue: 44, revenueDisplay: "~440억원",
+    growth: 100, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Beauty of Joseon, 한방 선크림, Relief Sun",
+    desc: "조선 미녀 컨셉 한방 스킨케어 인디 브랜드. 아마존·Sephora 입점으로 북미 급성장.",
+    descEn: "Joseon beauty concept traditional Korean herbal skincare. Rapid North America growth via Amazon & Sephora.",
+    ticker: "비상장 · Private",
+    employees: 145,
+    website: "https://beautyofjoseon.com",
+  },
+  {
+    rank: 49, nameKr: "셀퓨전씨", nameEn: "Cell Fusion C",
+    revenue: 42, revenueDisplay: "~420억원",
+    growth: 30, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "Cell Fusion C, Laser Sunscreen, Toning Ampoule",
+    desc: "레이저 시술 후 관리용 더마코스메틱. 피부과·성형외과 전문 채널 강세.",
+    descEn: "Post-laser procedure dermacosmetics. Strong in dermatology & plastic surgery clinic channels.",
+    ticker: "비상장 · Private",
+    employees: 110,
+    website: "https://cellfusionc.com",
+  },
+  {
+    rank: 50, nameKr: "아누아", nameEn: "Anua",
+    revenue: 40, revenueDisplay: "~400억원",
+    growth: 250, verified: false, founded: 2020, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Anua, 어성초 토너 (Heartleaf Toner), 쑥 라인",
+    desc: "어성초 성분 토너로 글로벌 틱톡 바이럴 달성. 더파운더즈 운영 브랜드로 급성장.",
+    descEn: "Heartleaf toner went globally viral on TikTok. Operated by The Founders with explosive growth.",
+    ticker: "비상장 · Private",
+    employees: 200,
+    website: "https://anua.kr",
+  },
+  {
+    rank: 51, nameKr: "비욘드", nameEn: "Beyond",
+    revenue: 38, revenueDisplay: "~380억원",
+    growth: 8, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Beyond, Angel Aqua, 자연주의 스킨케어",
+    desc: "LG생활건강 계열 자연주의 더마코스메틱 브랜드. 비건 인증·친환경 패키징.",
+    descEn: "LG H&H natural dermacosmetic brand. Vegan certified with eco-friendly packaging.",
+    ticker: "비상장 · Private",
+    employees: 130,
+    website: "https://www.beyond.co.kr",
+    largeGroup: "LG그룹",
+  },
+  {
+    rank: 52, nameKr: "티르티르", nameEn: "Tirtir",
+    revenue: 36, revenueDisplay: "~360억원",
+    growth: 90, verified: false, founded: 2016, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "TIRTIR, Mask Fit Red Cushion (마스크 핏 쿠션)",
+    desc: "글로벌 다양성 쿠션 파운데이션으로 아마존·Sephora 베스트셀러. 40가지 이상 쉐이드.",
+    descEn: "Inclusive cushion foundation with 40+ shades. Amazon & Sephora bestseller. Strong global demand.",
+    ticker: "비상장 · Private",
+    employees: 65,
+    website: "https://tirtir.co.kr",
+  },
+  {
+    rank: 53, nameKr: "제이준코스메틱", nameEn: "Jayjun Cosmetic",
+    revenue: 34, revenueDisplay: "~340억원",
+    growth: 18, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Jayjun, Jella Balm, 수분 마스크 시리즈",
+    desc: "수분 마스크팩·앰플 전문 브랜드. 면세·홈쇼핑 채널 중심으로 글로벌 진출.",
+    descEn: "Hydrating mask and ampoule specialist. Global expansion via duty-free & home shopping channels.",
+    ticker: "KOSDAQ: 025620",
+    employees: 85,
+    website: "https://www.jayjun.com",
+  },
+  {
+    rank: 54, nameKr: "라카", nameEn: "LAKA",
+    revenue: 32, revenueDisplay: "~320억원",
+    growth: 100, verified: false, founded: 2018, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "LAKA, 젠더리스 메이크업 (Genderless Makeup)",
+    desc: "성별 경계 없는 젠더리스 메이크업 브랜드. 한국콜마 계열. 유럽·미주 채널 고성장.",
+    descEn: "Genderless makeup brand transcending beauty norms. Kolmar Korea affiliate. High growth in EU & Americas.",
+    ticker: "비상장 · Private",
+    employees: 90,
+    website: "https://www.laka.co.kr",
+  },
+  {
+    rank: 55, nameKr: "셀리턴", nameEn: "Cellreturn",
+    revenue: 30, revenueDisplay: "~300억원",
+    growth: 35, verified: false, founded: 2013, hq: "경기 수원 · Suwon",
+    cat: "기기", catEn: "Device",
+    brands: "Cellreturn, LED Mask (LED 마스크), Premium LED",
+    desc: "LED 광선요법 홈 뷰티 기기 전문. 아이돌·셀럽 마케팅으로 글로벌 브랜드 인지도 구축.",
+    descEn: "LED phototherapy home beauty device specialist. Global brand recognition via idol & celebrity marketing.",
+    ticker: "비상장 · Private",
+    employees: 75,
+    website: "https://www.cellreturn.com",
+  },
+  {
+    rank: 56, nameKr: "스킨1004", nameEn: "SKIN1004",
+    revenue: 28, revenueDisplay: "~280억원",
+    growth: 95, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "SKIN1004, Madagascar Centella (마다가스카르 센텔라) 라인",
+    desc: "마다가스카르 센텔라 원료 특화 인디 브랜드. 구다이글로벌 포트폴리오 소속. 글로벌 급성장.",
+    descEn: "Madagascar centella-focused indie brand. Part of Goodai Global portfolio. Explosive global growth.",
+    ticker: "비상장 · Private",
+    employees: 115,
+    website: "https://skin1004.kr",
+  },
+  {
+    rank: 57, nameKr: "넘버즈인", nameEn: "Numbuzin",
+    revenue: 27, revenueDisplay: "~270억원",
+    growth: 85, verified: false, founded: 2019, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Numbuzin, No.5 세럼 (No.5 Serum)",
+    desc: "번호 시리즈 펩타이드·성분 특화 인디 브랜드. 아마존 스킨케어 카테고리 상위권.",
+    descEn: "Numbered peptide series skincare indie brand. High ranking in Amazon skincare category.",
+    ticker: "비상장 · Private",
+    employees: 155,
+    website: "https://www.numbuzin.com",
+  },
+  {
+    rank: 58, nameKr: "제이시스메디칼", nameEn: "Jeisys Medical",
+    revenue: 26, revenueDisplay: "~260억원",
+    growth: 35, verified: false, founded: 2006, hq: "서울 · Seoul",
+    cat: "기기", catEn: "Device",
+    brands: "POTENZA (포텐자 RF), Maquil (마퀼)",
+    desc: "RF 미세침 포텐자 등 피부과·성형외과용 의료기기 글로벌 수출 확대.",
+    descEn: "Global expansion of RF microneedling POTENZA and other aesthetic medical devices for clinics.",
+    ticker: "KOSDAQ: 287410",
+    employees: 220,
+    website: "https://www.jeisys.com",
+  },
+  {
+    rank: 59, nameKr: "아이소이", nameEn: "isoi",
+    revenue: 25, revenueDisplay: "~250억원",
+    growth: 18, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "isoi, Bulgarian Rose (불가리안 로즈) 라인",
+    desc: "불가리아 로즈 원료 특화 자연주의 스킨케어. TV홈쇼핑·온라인 병행 전략.",
+    descEn: "Bulgarian rose ingredient-focused natural skincare. TV home shopping & online combination strategy.",
+    ticker: "비상장 · Private",
+    employees: 80,
+    website: "https://www.isoi.kr",
+  },
+  {
+    rank: 60, nameKr: "피엔케이피부임상연구센타", nameEn: "PNK Skin Clinical Research",
+    revenue: 24, revenueDisplay: "~240억원",
+    growth: 20, verified: false, founded: 2004, hq: "서울 · Seoul",
+    cat: "임상/연구", catEn: "Clinical Research",
+    brands: "화장품 피부 임상 평가, 안전성·유효성 시험",
+    desc: "화장품 피부과학 임상 평가 전문 기관. 국내외 브랜드 제품 인증·시험 서비스.",
+    descEn: "Cosmetics dermatology clinical evaluation specialist. Certification & testing for domestic and global brands.",
+    ticker: "비상장 · Private",
+    employees: 130,
+    website: "https://www.pnkskin.com",
+  },
+  {
+    rank: 61, nameKr: "코스온", nameEn: "Coson",
+    revenue: 23, revenueDisplay: "~230억원",
+    growth: 22, verified: false, founded: 2009, hq: "경기 화성 · Hwaseong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "색조·기초 복합 OEM (글로벌 인디 브랜드 공급)",
+    desc: "색조·기초 화장품 복합 OEM. K-뷰티 수출 호조로 수주 잔고 증가.",
+    descEn: "Combined color & skincare OEM. Growing order backlog driven by K-beauty export boom.",
+    ticker: "비상장 · Private",
+    employees: 150,
+    website: "https://www.coson.co.kr",
+  },
+  {
+    rank: 62, nameKr: "다나한", nameEn: "Danahan",
+    revenue: 22, revenueDisplay: "~220억원",
+    growth: 15, verified: false, founded: 2006, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Danahan, 한방 스킨케어, 궁 라인",
+    desc: "한방·궁중 콘셉트 스킨케어 브랜드. TV홈쇼핑 채널 강세. 중장년층 주요 타깃.",
+    descEn: "Traditional Korean palace concept skincare. Strong TV home shopping. Targeting middle-aged consumers.",
+    ticker: "비상장 · Private",
+    employees: 70,
+    website: "https://www.danahan.com",
+  },
+  {
+    rank: 63, nameKr: "비니스트", nameEn: "Bnnist",
+    revenue: 21, revenueDisplay: "~210억원",
+    growth: 60, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Bni Biome, 프로바이오틱스 스킨케어",
+    desc: "프로바이오틱스 마이크로바이옴 기반 스킨케어 인디 브랜드. 온라인 채널 집중.",
+    descEn: "Probiotic microbiome skincare indie brand. Focused on online channels.",
+    ticker: "비상장 · Private",
+    employees: 55,
+    website: "https://bnnist.com",
+  },
+  {
+    rank: 64, nameKr: "한국암웨이", nameEn: "Amway Korea",
+    revenue: 20, revenueDisplay: "~200억원",
+    growth: 0, verified: false, founded: 1991, hq: "서울 · Seoul",
+    cat: "직판", catEn: "D2C / Direct Sales",
+    brands: "Artistry (아티스트리), Atmosphere, Nutrilite",
+    desc: "미국 암웨이 한국 법인. 아티스트리 뷰티·건강기능식품 네트워크 마케팅 판매.",
+    descEn: "Korean subsidiary of US Amway. Sells Artistry beauty & Nutrilite supplements via network marketing.",
+    ticker: "비상장 · Private",
+    employees: 560,
+    website: "https://www.amway.co.kr",
+    largeGroup: "Amway",
+  },
+  {
+    rank: 65, nameKr: "에스엔피월드", nameEn: "SNP World",
+    revenue: 19, revenueDisplay: "~190억원",
+    growth: 20, verified: false, founded: 2004, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "SNP, Animal Mask (동물 마스크), Bird's Nest",
+    desc: "동물 캐릭터 마스크팩으로 글로벌 인지도 구축. 아시아·미주 온라인 채널 확대.",
+    descEn: "Animal character mask pack building global recognition. Expanding online channels in Asia & Americas.",
+    ticker: "KOSDAQ: 306640",
+    employees: 95,
+    website: "https://www.snpworld.com",
+  },
+  {
+    rank: 66, nameKr: "뷰티풀홀딩스", nameEn: "Beautiful Holdings",
+    revenue: 18, revenueDisplay: "~180억원",
+    growth: 40, verified: false, founded: 2014, hq: "서울 · Seoul",
+    cat: "브랜드 그룹", catEn: "Brand Group",
+    brands: "Some By Mi (썸바이미), Glutanex",
+    desc: "썸바이미 브랜드 보유 뷰티 홀딩스. AHA·BHA 계열 기능성 라인 글로벌 인기.",
+    descEn: "Beauty holdings owning Some By Mi. AHA·BHA functional line globally popular.",
+    ticker: "비상장 · Private",
+    employees: 160,
+    website: "https://www.somebymi.com",
+  },
+  {
+    rank: 67, nameKr: "엑셀세라퓨틱스", nameEn: "Excel Therapeutics",
+    revenue: 17, revenueDisplay: "~170억원",
+    growth: 40, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "원료/바이오", catEn: "Ingredients / Biotech",
+    brands: "엑소좀 원료, 바이오 활성성분",
+    desc: "엑소좀·줄기세포 배양액 기반 기능성 원료 개발. 바이오 화장품 원료 B2B 공급.",
+    descEn: "Exosome & stem cell culture-based functional ingredient development. B2B biocosmetic ingredient supplier.",
+    ticker: "비상장 · Private",
+    employees: 90,
+    website: "https://excel-therapeutics.com",
+  },
+  {
+    rank: 68, nameKr: "더마펌", nameEn: "Dermafirm",
+    revenue: 16, revenueDisplay: "~160억원",
+    growth: 25, verified: false, founded: 2011, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "Dermafirm, R4 (리제네레이션 4 앰플)",
+    desc: "성형외과·피부과 전용 더마코스메틱 브랜드. 재생 앰플 스테디셀러.",
+    descEn: "Aesthetic clinic-exclusive dermacosmetic brand. Regeneration ampoule is a steady bestseller.",
+    ticker: "비상장 · Private",
+    employees: 80,
+    website: "https://www.dermafirm.co.kr",
+  },
+  {
+    rank: 69, nameKr: "미즌", nameEn: "Mizon",
+    revenue: 15, revenueDisplay: "~150억원",
+    growth: 12, verified: false, founded: 2009, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Mizon (미즌), Snail Repair (달팽이 크림)",
+    desc: "달팽이 분비물 기반 스킨케어 브랜드. 이커머스 채널 중심 유통. 유럽·중동 진출.",
+    descEn: "Snail secretion skincare brand. E-commerce focused distribution. Expansion in Europe & Middle East.",
+    ticker: "비상장 · Private",
+    employees: 70,
+    website: "https://www.mizon.co.kr",
+  },
+  {
+    rank: 70, nameKr: "한국화장품제조", nameEn: "Korea Cosmetics Manufacturing",
+    revenue: 15, revenueDisplay: "~150억원",
+    growth: 15, verified: false, founded: 1997, hq: "경기 화성 · Hwaseong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "기초·색조 복합 OEM (국내외 중소 브랜드 공급)",
+    desc: "기초·색조 화장품 복합 OEM 전문. 중소 인디 브랜드 수주 지속 증가.",
+    descEn: "Combined basic and color cosmetics OEM. Steady growth in orders from mid-size indie brands.",
+    ticker: "비상장 · Private",
+    employees: 210,
+    website: "https://www.kcmc.co.kr",
+  },
+  {
+    rank: 71, nameKr: "아이레시피", nameEn: "iRecipe",
+    revenue: 14, revenueDisplay: "~140억원",
+    growth: 35, verified: false, founded: 2016, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "I'm From (아임프롬), 쌀·꿀·감초 라인",
+    desc: "성분 투명성 특화 '아임프롬' 브랜드. 쌀·꿀·감초 등 전통 성분 현대화.",
+    descEn: "Ingredient-transparent I'm From brand. Modernizing traditional ingredients like rice, honey & licorice.",
+    ticker: "비상장 · Private",
+    employees: 60,
+    website: "https://www.imfromkorea.com",
+  },
+  {
+    rank: 72, nameKr: "라엘", nameEn: "Rael",
+    revenue: 14, revenueDisplay: "~140억원",
+    growth: 28, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Rael, 유기농 여성 케어·기초 스킨케어",
+    desc: "유기농 여성 위생·스킨케어 브랜드. 미국 아마존·Target 입점. 한국-미국 이중 법인.",
+    descEn: "Organic feminine hygiene & skincare brand. Listed on US Amazon & Target. Dual Korean-US entity.",
+    ticker: "비상장 · Private",
+    employees: 55,
+    website: "https://getrael.com",
+  },
+  {
+    rank: 73, nameKr: "셀리더마", nameEn: "Celliderma",
+    revenue: 13, revenueDisplay: "~130억원",
+    growth: 30, verified: false, founded: 2012, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "Celliderma, EGF 세럼, 재생 앰플",
+    desc: "EGF·성장인자 기반 재생 스킨케어 브랜드. 피부과 전용 처방 라인 판매.",
+    descEn: "EGF & growth factor-based regenerative skincare brand. Prescription line sold exclusively at dermatology clinics.",
+    ticker: "비상장 · Private",
+    employees: 48,
+    website: "https://celliderma.co.kr",
+  },
+  {
+    rank: 74, nameKr: "한스킨", nameEn: "Hanskin",
+    revenue: 13, revenueDisplay: "~130억원",
+    growth: 15, verified: false, founded: 2006, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Hanskin, 블랙헤드 BHA 스킨케어",
+    desc: "블랙헤드·모공 관리 BHA 스킨케어 전문 브랜드. 미국·유럽 온라인 채널 판매.",
+    descEn: "Blackhead & pore care BHA skincare specialist. Sales in US & European online channels.",
+    ticker: "비상장 · Private",
+    employees: 40,
+    website: "https://www.hanskincosmetic.com",
+  },
+  {
+    rank: 75, nameKr: "빌리프", nameEn: "Belif",
+    revenue: 12, revenueDisplay: "~120억원",
+    growth: 5, verified: false, founded: 2012, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Belif, The True Cream Aqua Bomb",
+    desc: "LG생활건강 프리미엄 영국 허벌리스트 콘셉트 스킨케어. 세포라 글로벌 채널.",
+    descEn: "LG H&H premium British herbalist concept skincare. Sephora global channel.",
+    ticker: "비상장 · Private",
+    employees: 100,
+    website: "https://www.belif.com",
+    largeGroup: "LG그룹",
+  },
+  {
+    rank: 76, nameKr: "라보에이치", nameEn: "Labo-H",
+    revenue: 12, revenueDisplay: "~120억원",
+    growth: 30, verified: false, founded: 2015, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Labo-H, 탈모 케어 샴푸·세럼",
+    desc: "탈모 케어 특화 헤어·스킨케어 브랜드. 홈쇼핑 및 온라인 채널 강세.",
+    descEn: "Hair loss care-focused hair & skincare brand. Strong in home shopping and online channels.",
+    ticker: "비상장 · Private",
+    employees: 50,
+    website: "https://www.laboh.co.kr",
+  },
+  {
+    rank: 77, nameKr: "코스랩", nameEn: "Coslab",
+    revenue: 11, revenueDisplay: "~110억원",
+    growth: 20, verified: false, founded: 2012, hq: "경기 · Gyeonggi",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "스킨케어 OEM (인디·중소 브랜드 공급)",
+    desc: "중소 인디 화장품 브랜드 특화 소량 ODM. 빠른 개발 기간과 최소 발주량 강점.",
+    descEn: "Small-batch ODM specialist for indie brands. Known for fast development timelines & low MOQ.",
+    ticker: "비상장 · Private",
+    employees: 120,
+    website: "https://www.coslab.co.kr",
+  },
+  {
+    rank: 78, nameKr: "아모스프로페셔날", nameEn: "Amos Professional",
+    revenue: 11, revenueDisplay: "~110억원",
+    growth: 8, verified: false, founded: 1996, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Amos Professional (헤어케어), 아모스뉴욕",
+    desc: "미용실 전문 헤어케어 브랜드. 국내 살롱 시장 1위 브랜드 위치 유지.",
+    descEn: "Professional salon haircare brand. Maintaining #1 position in Korea's salon market.",
+    ticker: "비상장 · Private",
+    employees: 120,
+    website: "https://www.amosprofessional.com",
+  },
+  {
+    rank: 79, nameKr: "바이오힐보", nameEn: "Bioheal BOH",
+    revenue: 10, revenueDisplay: "~100억원",
+    growth: 80, verified: false, founded: 2019, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Bioheal BOH, 프로바이오틱스 진정 라인",
+    desc: "프로바이오틱스·바이오텍 스킨케어 인디 브랜드. 올리브영 입점 후 급성장.",
+    descEn: "Probiotic & biotech skincare indie brand. Rapid growth after Olive Young listing.",
+    ticker: "비상장 · Private",
+    employees: 48,
+    website: "https://biohealboh.com",
+  },
+  {
+    rank: 80, nameKr: "퓨어힐스", nameEn: "Purehills",
+    revenue: 10, revenueDisplay: "~100억원",
+    growth: 28, verified: false, founded: 2013, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Purehills, 제주 성분 스킨케어",
+    desc: "제주 천연 원료 기반 클린 뷰티 스킨케어 브랜드. 온라인 채널 중심.",
+    descEn: "Jeju natural ingredient clean beauty skincare brand. Online-channel focused.",
+    ticker: "비상장 · Private",
+    employees: 50,
+    website: "https://www.purehills.co.kr",
+  },
+  {
+    rank: 81, nameKr: "씨티씨인터내셔날", nameEn: "CTC International",
+    revenue: 9, revenueDisplay: "~90억원",
+    growth: 22, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "스킨케어·헤어 OEM (해외 수출 특화)",
+    desc: "해외 수출 특화 스킨케어·헤어케어 OEM. 중동·동남아 수출 비중 확대.",
+    descEn: "Export-focused skincare & haircare OEM. Growing share of Middle East & Southeast Asia exports.",
+    ticker: "비상장 · Private",
+    employees: 95,
+    website: "https://www.ctcintl.co.kr",
+  },
+  {
+    rank: 82, nameKr: "웨이크메이크", nameEn: "Wakemake",
+    revenue: 9, revenueDisplay: "~90억원",
+    growth: 48, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Wakemake, 립·아이 컬러 메이크업",
+    desc: "Z세대 겨냥 컬러 메이크업 인디 브랜드. 올리브영·온라인 채널 인기.",
+    descEn: "Gen-Z targeted color makeup indie brand. Popular in Olive Young & online channels.",
+    ticker: "비상장 · Private",
+    employees: 42,
+    website: "https://www.wakemake.co.kr",
+  },
+  {
+    rank: 83, nameKr: "에프앤코", nameEn: "F&CO",
+    revenue: 8, revenueDisplay: "~80억원",
+    growth: 30, verified: false, founded: 2013, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "F&CO, 클린 뷰티 스킨케어",
+    desc: "클린 뷰티 스킨케어 전문 브랜드. 이커머스 중심 신규 고객 유입.",
+    descEn: "Clean beauty skincare specialist brand. E-commerce focused new customer acquisition.",
+    ticker: "비상장 · Private",
+    employees: 65,
+    website: "https://www.fnco.kr",
+  },
+  {
+    rank: 84, nameKr: "지피클럽", nameEn: "GP Club",
+    revenue: 8, revenueDisplay: "~80억원",
+    growth: 45, verified: false, founded: 2016, hq: "서울 · Seoul",
+    cat: "플랫폼", catEn: "Platform",
+    brands: "K-뷰티 인디 브랜드 인큐베이팅·유통",
+    desc: "K-뷰티 인디 브랜드 인큐베이팅 및 글로벌 유통 플랫폼. 브랜드 육성 전문.",
+    descEn: "K-beauty indie brand incubating & global distribution platform. Specialist in brand development.",
+    ticker: "비상장 · Private",
+    employees: 85,
+    website: "https://gpclub.co.kr",
+  },
+  {
+    rank: 85, nameKr: "아리얼", nameEn: "Ariel",
+    revenue: 8, revenueDisplay: "~80억원",
+    growth: 22, verified: false, founded: 2008, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Ariel, 기능성 스킨케어",
+    desc: "기능성 스킨케어 전문 브랜드. 온라인·오프라인 병행 채널 운영.",
+    descEn: "Functional skincare specialist brand. Combined online and offline channel strategy.",
+    ticker: "비상장 · Private",
+    employees: 65,
+    website: "https://arielcos.com",
+  },
+  {
+    rank: 86, nameKr: "한국야쿠르트 뷰티", nameEn: "Yakult Korea Beauty",
+    revenue: 7, revenueDisplay: "~70억원",
+    growth: 15, verified: false, founded: 2010, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "야쿠르트 발효 뷰티, 프로바이오틱 스킨케어",
+    desc: "발효 기술력 기반 프로바이오틱 뷰티 라인. 식품 브랜드 신뢰성 기반 마케팅.",
+    descEn: "Probiotic beauty line leveraging fermentation technology. Marketing based on food brand credibility.",
+    ticker: "비상장 · Private",
+    employees: 80,
+    website: "https://www.yakult.co.kr",
+  },
+  {
+    rank: 87, nameKr: "스킨그래머", nameEn: "Skingrammer",
+    revenue: 7, revenueDisplay: "~70억원",
+    growth: 42, verified: false, founded: 2014, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Skingrammer, 세럼·앰플 라인",
+    desc: "SNS 인플루언서 마케팅 기반 스킨케어 인디 브랜드. 아마존·틱톡 샵 채널 성장.",
+    descEn: "Skincare indie brand built on SNS influencer marketing. Growing on Amazon & TikTok Shop.",
+    ticker: "비상장 · Private",
+    employees: 38,
+    website: "https://skingrammer.com",
+  },
+  {
+    rank: 88, nameKr: "엔프라니", nameEn: "Enprani",
+    revenue: 7, revenueDisplay: "~70억원",
+    growth: 5, verified: false, founded: 1997, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Enprani, Lunasol, 더 로드 샵 (The Road Shop)",
+    desc: "중견 스킨케어·색조 브랜드. 방문판매 및 로드숍 채널 기반 안정적 운영.",
+    descEn: "Mid-size skincare & color brand. Stable operation based on direct sales & road shop channels.",
+    ticker: "비상장 · Private",
+    employees: 95,
+    website: "https://www.enprani.com",
+  },
+  {
+    rank: 89, nameKr: "글로우레시피", nameEn: "Glow Recipe KR",
+    revenue: 7, revenueDisplay: "~70억원",
+    growth: 35, verified: false, founded: 2014, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Glow Recipe, Watermelon Glow, 과일 스킨케어",
+    desc: "과일 성분 비건 스킨케어 한국계 미국 브랜드. 세포라·아마존 글로벌 히트.",
+    descEn: "Fruit-based vegan skincare Korean-American brand. Global hit at Sephora & Amazon.",
+    ticker: "비상장 · Private",
+    employees: 45,
+    website: "https://glowrecipe.com",
+  },
+  {
+    rank: 90, nameKr: "코스메카오딧세이", nameEn: "Cosmetica Odyssey",
+    revenue: 6, revenueDisplay: "~60억원",
+    growth: 18, verified: false, founded: 2003, hq: "충남 · Chungnam",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "기초·기능성 OEM (국내외 브랜드 위탁)",
+    desc: "기초·기능성 화장품 소량 다품종 ODM. 인디 브랜드 창업 지원 특화.",
+    descEn: "Small-batch multi-SKU ODM for basic & functional cosmetics. Specialist in indie brand startup support.",
+    ticker: "비상장 · Private",
+    employees: 110,
+    website: "https://cosmeticaodyssey.com",
+  },
+  {
+    rank: 91, nameKr: "더레드포인트", nameEn: "The Red Point",
+    revenue: 6, revenueDisplay: "~60억원",
+    growth: 28, verified: false, founded: 2015, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Red Point, 멀티케어 스킨케어",
+    desc: "멀티케어 기능성 스킨케어 인디 브랜드. SNS·온라인 집중 마케팅.",
+    descEn: "Multi-care functional skincare indie brand. SNS & online-focused marketing.",
+    ticker: "비상장 · Private",
+    employees: 35,
+    website: "https://theredpoint.co.kr",
+  },
+  {
+    rank: 92, nameKr: "시드물", nameEn: "Sidmool",
+    revenue: 6, revenueDisplay: "~60억원",
+    growth: 20, verified: false, founded: 2010, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Sidmool, 정제수 기반 스킨케어",
+    desc: "정제수·최소성분 철학의 클린 스킨케어 브랜드. 성분 민감자 전용 제품 라인.",
+    descEn: "Clean skincare brand with purified water & minimal ingredient philosophy. Line for sensitive-ingredient consumers.",
+    ticker: "비상장 · Private",
+    employees: 30,
+    website: "https://www.sidmool.com",
+  },
+  {
+    rank: 93, nameKr: "라한제약 코스메틱", nameEn: "Rahan Pharma Cosmetics",
+    revenue: 5, revenueDisplay: "~50억원",
+    growth: 22, verified: false, founded: 2008, hq: "경기 · Gyeonggi",
+    cat: "브랜드", catEn: "Med-Beauty",
+    brands: "약국 전용 더마코스메틱, 기능성 크림",
+    desc: "약국 유통 전용 더마코스메틱 브랜드. 의약 원료 기반 기능성 제품.",
+    descEn: "Pharmacy-exclusive dermacosmetic brand. Functional products based on pharmaceutical ingredients.",
+    ticker: "비상장 · Private",
+    employees: 45,
+    website: "https://rahancosmetics.co.kr",
+  },
+  {
+    rank: 94, nameKr: "오드리선", nameEn: "Audrey Sun",
+    revenue: 5, revenueDisplay: "~50억원",
+    growth: 50, verified: false, founded: 2019, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Audrey Sun, 선케어 특화 스킨케어",
+    desc: "선케어 특화 인디 뷰티 브랜드. 틱톡·인스타그램 글로벌 바이럴로 급성장.",
+    descEn: "Sun care-focused indie beauty brand. Explosive growth via TikTok & Instagram viral content.",
+    ticker: "비상장 · Private",
+    employees: 28,
+    website: "https://audreysun.co.kr",
+  },
+  {
+    rank: 95, nameKr: "한국콜마파마", nameEn: "Kolmar Pharma Korea",
+    revenue: 5, revenueDisplay: "~50억원",
+    growth: 12, verified: false, founded: 2005, hq: "세종 · Sejong",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "의약외품·기능성 화장품 OEM",
+    desc: "한국콜마 계열 의약외품·기능성 화장품 ODM 전문. 약국 채널 브랜드 위탁제조.",
+    descEn: "Kolmar Korea affiliate OEM for quasi-drugs & functional cosmetics. Contract manufacturing for pharmacy channel brands.",
+    ticker: "비상장 · Private",
+    employees: 150,
+    website: "https://www.kolmarpharma.co.kr",
+  },
+  {
+    rank: 96, nameKr: "에스피에이치", nameEn: "SPH",
+    revenue: 5, revenueDisplay: "~50억원",
+    growth: 18, verified: false, founded: 2011, hq: "경기 · Gyeonggi",
+    cat: "원료", catEn: "Ingredients",
+    brands: "천연 방부제, 기능성 활성 원료",
+    desc: "천연 방부 시스템·기능성 원료 전문 기업. 글로벌 클린 뷰티 트렌드 수혜.",
+    descEn: "Natural preservative systems & functional ingredient specialist. Benefiting from global clean beauty trend.",
+    ticker: "비상장 · Private",
+    employees: 60,
+    website: "https://www.sph.co.kr",
+  },
+  {
+    rank: 97, nameKr: "코스메이드", nameEn: "CosMade",
+    revenue: 4, revenueDisplay: "~40억원",
+    growth: 25, verified: false, founded: 2015, hq: "서울 · Seoul",
+    cat: "OEM/ODM", catEn: "OEM / ODM",
+    brands: "소규모 K-뷰티 OEM 위탁제조",
+    desc: "소규모 인디 브랜드 맞춤 소량 OEM. 빠른 납기와 합리적 단가 강점.",
+    descEn: "Custom small-batch OEM for indie brands. Known for fast delivery and competitive pricing.",
+    ticker: "비상장 · Private",
+    employees: 50,
+    website: "https://www.cosmade.co.kr",
+  },
+  {
+    rank: 98, nameKr: "이지스킨", nameEn: "Eazyskin",
+    revenue: 4, revenueDisplay: "~40억원",
+    growth: 32, verified: false, founded: 2017, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "Eazyskin, 저자극 기초 스킨케어",
+    desc: "저자극·무향 기초 스킨케어 인디 브랜드. 민감성 피부 타겟 온라인 전용.",
+    descEn: "Low-irritant fragrance-free skincare indie brand. Online-exclusive for sensitive skin consumers.",
+    ticker: "비상장 · Private",
+    employees: 25,
+    website: "https://www.eazyskin.com",
+  },
+  {
+    rank: 99, nameKr: "뉴앤바이", nameEn: "New and By",
+    revenue: 4, revenueDisplay: "~40억원",
+    growth: 38, verified: false, founded: 2018, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "New and By, 트렌드 컬러 메이크업",
+    desc: "MZ세대 타깃 트렌디 컬러 메이크업 인디 브랜드. 빠른 트렌드 대응 강점.",
+    descEn: "Trendy color makeup indie brand targeting MZ generation. Strength in rapid trend response.",
+    ticker: "비상장 · Private",
+    employees: 22,
+    website: "https://newandby.co.kr",
+  },
+  {
+    rank: 100, nameKr: "티파코스메틱", nameEn: "TIPA Cosmetics",
+    revenue: 3, revenueDisplay: "~30억원",
+    growth: 22, verified: false, founded: 2013, hq: "서울 · Seoul",
+    cat: "브랜드", catEn: "Brand",
+    brands: "TIPA, 더마·기능성 스킨케어",
+    desc: "더마·기능성 스킨케어 전문 인디 브랜드. 글로벌 이커머스 채널 신흥 강자.",
+    descEn: "Derma & functional skincare indie brand specialist. Emerging player in global e-commerce channels.",
+    ticker: "비상장 · Private",
+    employees: 28,
+    website: "https://tipacosmetics.com",
+  },
+];
+
+let activeFilter = 'all';
+let activeSort = 'rank';
+
+function getCatClass(cat) {
+  if (cat === 'OEM/ODM') return 'cat-odm';
+  if (cat === '플랫폼') return 'cat-platform';
+  if (cat === '직판') return 'cat-d2c';
+  return 'cat-brand';
+}
+
+function getRankClass(rank) {
+  if (rank === 1) return 'rank-1';
+  if (rank === 2) return 'rank-2';
+  if (rank === 3) return 'rank-3';
+  if (rank <= 10) return 'rank-top10';
+  if (rank <= 20) return 'rank-top20';
+  return 'rank-rest';
+}
+
+function sizeLabel(emp) {
+  if (!emp) return null;
+  if (emp >= 3000) return 'ENT';
+  if (emp >= 500)  return 'MM';
+  return 'CMRC';
+}
+
+function empChip(emp) {
+  if (!emp) return '';
+  const label = sizeLabel(emp);
+  return `<span class="size-tag size-${label}">${emp.toLocaleString()}명 · ${label}</span>`;
+}
+
+function growthChip(g) {
+  if (g >= 50) return `<span class="growth-chip growth-pos">🔥 +${g}%</span>`;
+  if (g > 0)  return `<span class="growth-chip growth-pos">▲ +${g}%</span>`;
+  if (g < 0)  return `<span class="growth-chip growth-neg">▼ ${g}%</span>`;
+  return `<span class="growth-chip growth-neu">— 0%</span>`;
+}
+
+function renderCards(data) {
+  const grid = document.getElementById('companyGrid');
+  grid.innerHTML = '';
+  data.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'company-card';
+    card.dataset.cat = c.cat;
+    card.dataset.rank = c.rank;
+    card.dataset.revenue = c.revenue;
+    card.dataset.growth = c.growth;
+    card.dataset.founded = c.founded;
+    card.innerHTML = `
+      <div class="rank-badge ${getRankClass(c.rank)}">${c.rank}</div>
+      <div class="company-info">
+        <div class="company-name-kr" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span>${c.nameKr}</span>
+          <span style="font-size:10px;color:var(--muted);font-weight:400;">${c.ticker}</span>
+          ${c.website ? `<a class="website-btn" href="${c.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🌐 홈페이지</a>` : ''}
+        </div>
+        <div class="company-name-en">${c.nameEn}</div>
+        <div class="meta-row">
+          <span class="cat-tag ${getCatClass(c.cat)}">${c.cat}</span>
+          ${empChip(c.employees)}
+          <span class="brands-list"><span>${c.brands.split(',')[0]}</span>${c.brands.includes(',') ? ' · ' + c.brands.split(',').slice(1).join(' ·') : ''}</span>
+        </div>
+      </div>
+      <div class="revenue-block">
+        <div class="revenue-val">${c.revenueDisplay}</div>
+        <div class="revenue-sub">2025 매출 · Revenue &nbsp;<span style="font-size:10px;padding:1px 6px;border-radius:4px;background:${c.verified?'#eaf5ee':'#f5f5f5'};color:${c.verified?'#2e7d52':'#999'}">${c.verified?'공식':'추정'}</span></div>
+        ${growthChip(c.growth)}
+        <div class="founded-lbl">설립 ${c.founded}년</div>
+        <div class="hq-lbl">📍 ${c.hq}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => toggleDetail(card, c));
+    grid.appendChild(card);
+  });
+  document.getElementById('countBadge').textContent = data.length;
+}
+
+function toggleDetail(card, c) {
+  const existing = card.nextElementSibling;
+  if (existing && existing.classList.contains('detail-panel')) {
+    existing.remove();
+    return;
+  }
+  // remove any other open panels
+  document.querySelectorAll('.detail-panel').forEach(p => p.remove());
+
+  const panel = document.createElement('div');
+  panel.className = 'detail-panel open';
+  panel.innerHTML = `
+    <div class="detail-item"><label>설립연도 Founded</label><span>${c.founded}</span></div>
+    <div class="detail-item"><label>사원수 Employees</label><span>${c.employees ? c.employees.toLocaleString() + '명 (' + sizeLabel(c.employees) + ')' : '미공개'}</span></div>
+    <div class="detail-item"><label>본사 Headquarters</label><span>${c.hq}</span></div>
+    <div class="detail-item"><label>카테고리 Category</label><span>${c.cat} · ${c.catEn}</span></div>
+    <div class="detail-item"><label>매출 Revenue (2024)</label><span>${c.revenueDisplay}</span></div>
+    <div class="detail-item"><label>성장률 YoY Growth</label><span>${c.growth > 0 ? '+' : ''}${c.growth}%</span></div>
+    <div class="detail-item"><label>주식/상장 Ticker</label><span>${c.ticker}</span></div>
+    <div class="detail-item" style="grid-column: 1/-1"><label>대표 브랜드 Key Brands</label><span class="ko">${c.brands}</span></div>
+    <div class="detail-item" style="grid-column: 1/-1"><label>기업 설명 (KR)</label><span class="ko">${c.desc}</span></div>
+    <div class="detail-item" style="grid-column: 1/-1"><label>Description (EN)</label><span>${c.descEn}</span></div>
+    ${c.website ? `<div class="detail-item" style="grid-column:1/-1"><label>🌐 홈페이지 Homepage</label><span><a href="${c.website}" target="_blank" rel="noopener" style="color:var(--rose-dk);font-weight:600;">${c.website}</a></span></div>` : ''}
+  `;
+  card.after(panel);
+}
+
+function getFilteredSorted() {
+  let data = [...companies];
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  if (q) {
+    data = data.filter(c =>
+      c.nameKr.includes(q) || c.nameEn.toLowerCase().includes(q) ||
+      c.brands.toLowerCase().includes(q) || c.cat.includes(q)
+    );
+  }
+  if (activeFilter !== 'all') {
+    data = data.filter(c => c.cat === activeFilter);
+  }
+  if (activeSort === 'revenue') data.sort((a,b) => b.revenue - a.revenue);
+  else if (activeSort === 'growth') data.sort((a,b) => b.growth - a.growth);
+  else if (activeSort === 'founded') data.sort((a,b) => a.founded - b.founded);
+  else data.sort((a,b) => a.rank - b.rank);
+  return data;
+}
+
+function filterCards() { renderCards(getFilteredSorted()); }
+function sortCards() {
+  activeSort = document.getElementById('sortSelect').value;
+  renderCards(getFilteredSorted());
+}
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(getFilteredSorted());
+}
+
+renderCards(companies);
+</script>
+</body>
+</html>
